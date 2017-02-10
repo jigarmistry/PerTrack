@@ -59,13 +59,13 @@ export class SettingsPage {
 
     this.dbManager.getConfigData("rlimit").then((data) => {
       this.recordLimit = data.res.rows.item(0).cvalue;
-    })
+    });
     this.dbManager.getConfigData("dname").then((data) => {
       this.defaultName = data.res.rows.item(0).cvalue;
-    })
+    });
     this.dbManager.getConfigData("damount").then((data) => {
       this.defaultAmount = data.res.rows.item(0).cvalue;
-    })
+    });
 
   }
 

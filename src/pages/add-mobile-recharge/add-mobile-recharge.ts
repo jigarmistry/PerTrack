@@ -37,6 +37,12 @@ export class AddMobileRechargePage {
 
   ionViewWillEnter() {
     this.getMobileNumbers();
+    this.dbManager.getConfigData("dname").then((data) => {
+      this.name = data.res.rows.item(0).cvalue;
+    });
+    this.dbManager.getConfigData("damount").then((data) => {
+      this.amount = data.res.rows.item(0).cvalue;
+    });
   }
 
   getMobileNumbers() {
