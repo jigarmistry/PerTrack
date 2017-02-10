@@ -1,7 +1,49 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>AddMobileRecharge</ion-title>
+    <ion-title>Add Mobile Recharge</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label stacked>Name</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Amount</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Mobile Number</ion-label>
+      <ion-select [(ngModel)]="mobilenumber">
+        <ion-option value="nes">NES</ion-option>
+        <ion-option value="n64">Nintendo64</ion-option>
+        <ion-option value="ps">PlayStation</ion-option>
+        <ion-option value="genesis">Sega Genesis</ion-option>
+        <ion-option value="saturn">Sega Saturn</ion-option>
+        <ion-option value="snes">SNES</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Type</ion-label>
+      <ion-select [(ngModel)]="type">
+        <ion-option value="nes">Calling</ion-option>
+        <ion-option value="n64">Internet</ion-option>
+        <ion-option value="ps">Special</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Date</ion-label>
+      <ion-datetime displayFormat="DD-MMM-YYYY HH:mm" pickerFormat="DD-MMM-YY HH:mm" [(ngModel)]="date"></ion-datetime>
+    </ion-item>
+  </ion-list>
 </ion-content>
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-buttons style="text-align: center">
+      <button ion-button>
+          Add
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
