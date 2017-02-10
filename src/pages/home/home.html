@@ -14,15 +14,10 @@
       <h2 color="primary">Mobile Recharges</h2>
     </ion-item>
     <ion-list>
-      <button ion-item>
-        8460163577
-        <h3 style="color:gray">₹ 100 - Calling</h3>
-        <h4 item-right>02-02-2017 14:12</h4>
-      </button>
-      <button ion-item>
-        8460163577
-        <h3 style="color:gray">₹ 100 - Internet</h3>
-        <h4 item-right>02-02-2017 14:12</h4>
+      <button ion-item *ngFor="let mre of mobileRechargeData">
+        {{mre.mobilenumber}}
+        <h3 style="color:gray">₹ {{mre.amount}} - {{mre.type}}</h3>
+        <h6 item-right style="font-size: 12px;">{{mre.logdate}}</h6>
       </button>
     </ion-list>
   </ion-card>

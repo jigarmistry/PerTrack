@@ -4,7 +4,7 @@ import { NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { AddMobileRechargePage } from '../add-mobile-recharge/add-mobile-recharge';
 import { AddPetrolLogPage } from '../add-petrol-log/add-petrol-log';
 import { SettingsPage } from '../settings/settings';
-
+import { DbManager } from '../../helpers/db-manager';
 
 @Component({
   selector: 'page-home',
@@ -12,12 +12,48 @@ import { SettingsPage } from '../settings/settings';
 })
 export class HomePage {
 
+  public dbManager: DbManager;
+  public mobileRechargeData: Array<{
+    mobilenumber: String, amount: String, type: String, id: Number,
+    logdate: String
+  }>;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController) {
+
+    this.mobileRechargeData = [];
+    this.dbManager = new DbManager();
   }
 
   ionViewDidLoad() {
+  }
+
+  ionViewWillEnter() {
+    this.getMobileRechargeData();
+  }
+
+  formatLogDate(date) {
+    let preDate = new Date(date);
+    let mins = preDate.getMinutes().toString();
+    let dMins = mins.length > 1 ? mins : "0" + mins;
+    return preDate.toDateString() + " " + preDate.getHours() + ":" + dMins;
+  }
+
+  getMobileRechargeData() {
+    this.mobileRechargeData = [];
+    this.dbManager.getMobileRechargesForHome().then((data) => {
+      if (data.res.rows.length > 0) {
+        for (var i = 0; i < data.res.rows.length; i++) {
+          let rData = data.res.rows.item(i);
+          let fDate = this.formatLogDate(rData.logdate);
+          this.mobileRechargeData.push({
+            mobilenumber: rData.mobilenumber,
+            amount: rData.amount, type: rData.type, id: rData.id, logdate: fDate
+          });
+        }
+      }
+    });
   }
 
   onClickAddMobileRecharge() {

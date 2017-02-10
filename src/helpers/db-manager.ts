@@ -21,6 +21,11 @@ export class DbManager {
     return this.storage.query(sql);
   }
 
+  getMobileRechargesForHome() {
+    let sql = `SELECT mobilerecharge.*,mobilenumbers.mobilenumber from mobilerecharge, mobilenumbers where mobilerecharge.mobilenumberid = mobilenumbers.id order by mobilerecharge.id DESC limit 2`;
+    return this.storage.query(sql);
+  }
+
   addMobileNumber(data) {
     let sql = `INSERT INTO 'mobilenumbers'('mobilenumber','carrier','status') VALUES (?,?,?)`;
     return this.storage.query(sql, [data["mobilenumber"], data["carrier"], 'A']);
