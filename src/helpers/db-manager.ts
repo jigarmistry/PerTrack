@@ -30,4 +30,10 @@ export class DbManager {
     let sql = `INSERT INTO 'vehicles'('name','status') VALUES (?,?)`;
     return this.storage.query(sql, [data["name"], 'A']);
   }
+
+  addMobileRecharge(data) {
+    let sql = `INSERT INTO 'mobilerecharge'('name','mobilenumberid','amount','type','logdate','status') VALUES (?,?,?,?,?,?)`;
+    return this.storage.query(sql,
+      [data["name"], data["mobilenumberid"], data["amount"], data["type"], data["logdate"], 'A']);
+  }
 }

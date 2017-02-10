@@ -7,41 +7,36 @@
   <ion-list>
     <ion-item>
       <ion-label stacked>Name</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="name"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Amount</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-input type="number" [(ngModel)]="amount"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Mobile Number</ion-label>
       <ion-select [(ngModel)]="mobilenumber">
-        <ion-option value="nes">NES</ion-option>
-        <ion-option value="n64">Nintendo64</ion-option>
-        <ion-option value="ps">PlayStation</ion-option>
-        <ion-option value="genesis">Sega Genesis</ion-option>
-        <ion-option value="saturn">Sega Saturn</ion-option>
-        <ion-option value="snes">SNES</ion-option>
+        <ion-option value={{mobile.id}} *ngFor="let mobile of allMobileNumbers">{{mobile.mobilenumber}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label stacked>Type</ion-label>
       <ion-select [(ngModel)]="type">
-        <ion-option value="nes">Calling</ion-option>
-        <ion-option value="n64">Internet</ion-option>
-        <ion-option value="ps">Special</ion-option>
+        <ion-option value="Calling">Calling</ion-option>
+        <ion-option value="Internet">Internet</ion-option>
+        <ion-option value="Special">Special</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label stacked>Date</ion-label>
-      <ion-datetime displayFormat="DD-MMM-YYYY HH:mm" pickerFormat="DD-MMM-YY HH:mm" [(ngModel)]="date"></ion-datetime>
+      <ion-datetime displayFormat="DD-MMM-YYYY HH:mm" pickerFormat="DD-MMM-YY HH:mm" [(ngModel)]="logdate"></ion-datetime>
     </ion-item>
   </ion-list>
 </ion-content>
-<ion-footer>
+<ion-footer *ngIf="isMobileNumberAdded">
   <ion-toolbar color="primary">
-    <ion-buttons style="text-align: center">
-      <button ion-button>
+    <ion-buttons style="text-align: center;width: 100%;">
+      <button style="width: 100%" ion-button tappable (click)="onClickAddMobileRecharge()">
           Add
       </button>
     </ion-buttons>
