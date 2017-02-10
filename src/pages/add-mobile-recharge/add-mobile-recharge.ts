@@ -25,7 +25,6 @@ export class AddMobileRechargePage {
 
     this.name = "";
     this.mobilenumber = 0;
-    this.amount = 0;
     this.type = "Calling";
     let zonTime = (new Date().getTimezoneOffset() * 60000);
     let fLocalDate = new Date(new Date().getTime() - zonTime).toISOString()

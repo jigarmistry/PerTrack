@@ -5,7 +5,7 @@
 </ion-header>
 <ion-content>
   <ion-item-group>
-    <ion-item-divider color="light">General</ion-item-divider>
+    <ion-item-divider color="light">Data</ion-item-divider>
     <ion-item>
       <ion-icon name="phone-portrait" item-left></ion-icon>
       <ion-label (click)="onClickAddMobile()" tappable>Add Mobile Number</ion-label>
@@ -15,6 +15,21 @@
       <ion-icon name="bicycle" item-left></ion-icon>
       <ion-label (click)="onClickAddVehicle()" tappable>Add Vehicle</ion-label>
       <ion-badge item-right (click)="onClickVehicleBadge()" tappable>{{vehiclesCount}}</ion-badge>
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider color="light">Config</ion-item-divider>
+    <ion-item>
+      <ion-label (click)="onClickSetConfigData('rlimit')" tappable>Record Limit</ion-label>
+      <ion-badge item-right color="badgeForDefault" tappable>{{recordLimit}}</ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-label (click)="onClickSetConfigData('dname')" tappable>Default Name</ion-label>
+      <ion-badge item-right color="badgeForDefault" tappable>{{defaultName}}</ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-label (click)="onClickSetConfigData('damount')" tappable>Default Amount</ion-label>
+      <ion-badge item-right (click)="onClickVehicleBadge()" color="badgeForDefault" tappable>₹ {{defaultAmount}}</ion-badge>
     </ion-item>
   </ion-item-group>
   <ion-item-group>

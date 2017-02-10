@@ -13,6 +13,9 @@ export class SettingsPage {
   public allVehicles: Array<{ name: String }>;
   public mobileNumbersCount: Number;
   public vehiclesCount: Number;
+  public recordLimit: String;
+  public defaultName: String;
+  public defaultAmount: String;
 
   constructor(public alertCtrl: AlertController,
     public navCtrl: NavController,
@@ -53,6 +56,17 @@ export class SettingsPage {
       }
       this.vehiclesCount = this.allVehicles.length;
     });
+
+    this.dbManager.getConfigData("rlimit").then((data) => {
+      this.recordLimit = data.res.rows.item(0).cvalue;
+    })
+    this.dbManager.getConfigData("dname").then((data) => {
+      this.defaultName = data.res.rows.item(0).cvalue;
+    })
+    this.dbManager.getConfigData("damount").then((data) => {
+      this.defaultAmount = data.res.rows.item(0).cvalue;
+    })
+
   }
 
   addMobileNumberIntoDb(data) {
@@ -153,6 +167,55 @@ export class SettingsPage {
           handler: data => {
             prompt.dismiss();
             this.addMobileNumberIntoDb(data);
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
+  onClickSetConfigData(type) {
+
+    var message = "Set Record Limit";
+    var value = this.recordLimit.toString();
+    var ttype = "number";
+
+    if (type == "dname") {
+      message = "Set Default Name";
+      value = this.defaultName.toString();
+      ttype = "text";
+    }
+    if (type == "damount") {
+      message = "Set Default Amount";
+      value = this.defaultAmount.toString();
+      ttype = "text";
+    }
+
+    let prompt = this.alertCtrl.create({
+      title: 'PerTrack',
+      message: message,
+      inputs: [
+        {
+          name: 'config',
+          placeholder: 'Config',
+          value: value,
+          type: ttype
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Set',
+          handler: data => {
+            prompt.dismiss();
+            this.dbManager.updateConfigData({ ctype: type, cvalue: data.config }).then(() => {
+              this.getDataFromDb();
+            });
           }
         }
       ]

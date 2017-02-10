@@ -18,6 +18,8 @@ export class HomePage {
     logdate: String
   }>;
 
+  public limit: String;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController) {
@@ -30,11 +32,25 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
-    this.getMobileRechargeData();
+    this.getConfigData();
+  }
+
+  getConfigData() {
+    this.dbManager.getConfigData("rlimit").then((data) => {
+      if (data.res.rows.length > 0) {
+        for (var i = 0; i < data.res.rows.length; i++) {
+          let cData = data.res.rows.item(i);
+          this.limit = cData.cvalue;
+        }
+      }
+      this.getMobileRechargeData();
+    })
   }
 
   formatLogDate(date) {
-    let preDate = new Date(date);
+    let dDate = new Date(date);
+    let zonTime = (dDate.getTimezoneOffset() * 60000);
+    let preDate = new Date(dDate.getTime() + zonTime);
     let mins = preDate.getMinutes().toString();
     let dMins = mins.length > 1 ? mins : "0" + mins;
     return preDate.toDateString() + " " + preDate.getHours() + ":" + dMins;
@@ -42,7 +58,7 @@ export class HomePage {
 
   getMobileRechargeData() {
     this.mobileRechargeData = [];
-    this.dbManager.getMobileRechargesForHome().then((data) => {
+    this.dbManager.getMobileRechargesForHome(this.limit).then((data) => {
       if (data.res.rows.length > 0) {
         for (var i = 0; i < data.res.rows.length; i++) {
           let rData = data.res.rows.item(i);

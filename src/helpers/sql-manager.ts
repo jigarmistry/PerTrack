@@ -62,6 +62,14 @@ export class SqlManager {
       }, (error) => {
         console.log("Error in vehicles table creation" + JSON.stringify(error.err));
       });
+
+    // configdata table
+    this.query(`CREATE TABLE IF NOT EXISTS 'configdata' ('id' INTEGER PRIMARY KEY AUTOINCREMENT,
+    'ctype' TEXT,'cvalue' TEXT)`).then(() => {
+        console.log("configdata table created");
+      }, (error) => {
+        console.log("Error in configdata table creation" + JSON.stringify(error.err));
+      });
   }
 
   /**
