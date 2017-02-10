@@ -33,7 +33,7 @@ export class SqlManager {
 
     // mobilerecharge table
     this.query(`CREATE TABLE IF NOT EXISTS 'mobilerecharge' ('id' INTEGER PRIMARY KEY AUTOINCREMENT,
-    'name' TEXT,'mobilenumberid' NUMBER, 'amount' TEXT, 'logdate' datetime, 'status' TEXT)`).then(() => {
+    'name' TEXT,'mobilenumberid' NUMBER, 'amount' TEXT, 'type' TEXT, 'logdate' datetime, 'status' TEXT)`).then(() => {
         console.log("mobilerecharge table created");
       }, (error) => {
         console.log("Error in mobilerecharge table creation" + JSON.stringify(error.err));

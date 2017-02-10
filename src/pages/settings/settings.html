@@ -7,14 +7,14 @@
   <ion-item-group>
     <ion-item-divider color="light">General</ion-item-divider>
     <ion-item>
-      <ion-icon name="call" item-left></ion-icon>
+      <ion-icon name="phone-portrait" item-left></ion-icon>
       <ion-label (click)="onClickAddMobile()" tappable>Add Mobile Number</ion-label>
-      <ion-badge item-right (click)="onClickMobileBadge()" tappable>3</ion-badge>
+      <ion-badge item-right (click)="onClickMobileBadge()" tappable>{{mobileNumbersCount}}</ion-badge>
     </ion-item>
     <ion-item>
       <ion-icon name="bicycle" item-left></ion-icon>
       <ion-label (click)="onClickAddVehicle()" tappable>Add Vehicle</ion-label>
-      <ion-badge item-right (click)="onClickVehicleBadge()" tappable>1</ion-badge>
+      <ion-badge item-right (click)="onClickVehicleBadge()" tappable>{{vehiclesCount}}</ion-badge>
     </ion-item>
   </ion-item-group>
   <ion-item-group>

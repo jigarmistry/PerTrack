@@ -18,15 +18,16 @@ export class DbManager {
 
   getAllVehicles() {
     let sql = `SELECT * from vehicles`;
-    this.storage.query(sql).then((data) => {
-      console.log(data);
-    });
+    return this.storage.query(sql);
   }
 
-  insertIntoTable() {
-    let sql = `INSERT INTO 'backup'('name','visible_name','item_id','status','user_id') VALUES (?,?,?,?,?)`;
-    this.storage.query(sql, [1234567, "Backup Name", 12, 'A', '3']).then(() => {
-      console.log("Data inserted");
-    });
+  addMobileNumber(data) {
+    let sql = `INSERT INTO 'mobilenumbers'('mobilenumber','carrier','status') VALUES (?,?,?)`;
+    return this.storage.query(sql, [data["mobilenumber"], data["carrier"], 'A']);
+  }
+
+  addVehicle(data) {
+    let sql = `INSERT INTO 'vehicles'('name','status') VALUES (?,?)`;
+    return this.storage.query(sql, [data["name"], 'A']);
   }
 }
