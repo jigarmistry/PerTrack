@@ -28,7 +28,6 @@ export class AddPetrolLogPage {
 
     this.name = "";
     this.vehicle = 0;
-    this.liters = 1;
     let zonTime = (new Date().getTimezoneOffset() * 60000);
     let fLocalDate = new Date(new Date().getTime() - zonTime).toISOString()
     this.logdate = fLocalDate;

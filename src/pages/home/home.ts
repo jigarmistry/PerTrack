@@ -3,6 +3,8 @@ import { NavController, NavParams, ActionSheetController } from 'ionic-angular';
 
 import { AddMobileRechargePage } from '../add-mobile-recharge/add-mobile-recharge';
 import { AddPetrolLogPage } from '../add-petrol-log/add-petrol-log';
+import { MobileRechargesPage } from '../mobile-recharges/mobile-recharges';
+import { VehicleLogsPage } from '../vehicle-logs/vehicle-logs';
 import { SettingsPage } from '../settings/settings';
 import { DbManager } from '../../helpers/db-manager';
 
@@ -92,6 +94,14 @@ export class HomePage {
         }
       }
     });
+  }
+
+  onClickMobileRecharges() {
+    this.navCtrl.push(MobileRechargesPage);
+  }
+
+  onClickVehicleLogs() {
+    this.navCtrl.push(VehicleLogsPage);
   }
 
   onClickAddMobileRecharge() {

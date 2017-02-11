@@ -21,6 +21,16 @@ export class DbManager {
     return this.storage.query(sql);
   }
 
+  getAllMobileRecharges() {
+    let sql = `SELECT * from mobilerecharge order by id DESC`;
+    return this.storage.query(sql);
+  }
+
+  getAllVehicelLogs() {
+    let sql = `SELECT * from petrollog order by id DESC`;
+    return this.storage.query(sql);
+  }
+
   getMobileRechargesForHome(limit) {
     let sql = `SELECT mobilerecharge.*,mobilenumbers.mobilenumber from mobilerecharge, mobilenumbers where mobilerecharge.mobilenumberid = mobilenumbers.id order by mobilerecharge.id DESC limit ?`;
     return this.storage.query(sql, [limit]);
@@ -32,7 +42,7 @@ export class DbManager {
   }
 
   getLastVehicelLog() {
-    let sql = `SELECT * from petrollog where order by id DESC limit 1`;
+    let sql = `SELECT * from petrollog order by id DESC limit 1`;
     return this.storage.query(sql);
   }
 

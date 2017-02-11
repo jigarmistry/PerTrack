@@ -17,7 +17,7 @@
       <h2 color="primary">Mobile Recharges</h2>
     </ion-item>
     <ion-list>
-      <button ion-item *ngFor="let mre of mobileRechargeData">
+      <button ion-item *ngFor="let mre of mobileRechargeData" (click)="onClickMobileRecharges()">
         {{mre.mobilenumber}}
         <h3 style="color:gray">₹ {{mre.amount}} - {{mre.type}}</h3>
         <h6 item-right style="font-size: 12px;">{{mre.logdate}}</h6>
@@ -29,7 +29,7 @@
       <h2 color="primary">Vehicle Logs</h2>
     </ion-item>
     <ion-list>
-      <button ion-item *ngFor="let veh of vehicleLogData">
+      <button ion-item *ngFor="let veh of vehicleLogData" (click)="onClickVehicleLogs()">
         {{veh.vehiclename}}
         <h3 style="color:gray">₹ {{veh.amount}} - {{veh.liters}} ltrs</h3>
         <h4 item-right>{{veh.logdate}}</h4>
