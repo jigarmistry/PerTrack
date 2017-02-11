@@ -54,13 +54,16 @@ export class MobileRechargesPage {
           });
         }
       }
+      if (this.mobileRecharges.length == 0) {
+        this.navCtrl.pop();
+      }
     })
   }
 
   onClickDeleteRecharge(id) {
     let confirm = this.alertCtrl.create({
       title: 'PerTrack',
-      message: 'Are you sure want to delete the entry?',
+      message: 'Are you sure want to delete the mobile recharge?',
       buttons: [
         {
           text: 'Yes',
@@ -68,7 +71,7 @@ export class MobileRechargesPage {
             confirm.dismiss();
             this.dbManager.deleteMobileRecharge(id).then(() => {
               let toast = this.toastCtrl.create({
-                message: 'Entery Deleted',
+                message: 'Mobile Recharge Deleted',
                 duration: 2000,
                 position: 'bottom'
               });

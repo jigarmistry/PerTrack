@@ -16,7 +16,7 @@ import { SettingsPage } from '../pages/settings/settings';
     AddPetrolLogPage,
     SettingsPage,
     MobileRechargesPage,
-    SettingsPage
+    VehicleLogsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -29,7 +29,7 @@ import { SettingsPage } from '../pages/settings/settings';
     AddPetrolLogPage,
     SettingsPage,
     MobileRechargesPage,
-    SettingsPage
+    VehicleLogsPage
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }]
 })

@@ -94,4 +94,9 @@ export class DbManager {
     let sql = `DELETE FROM 'mobilerecharge' where id = ?`;
     return this.storage.query(sql, [id]);
   }
+
+  deleteVehicleLog(id) {
+    let sql = `DELETE FROM 'petrollog' where id = ?`;
+    return this.storage.query(sql, [id]);
+  }
 }

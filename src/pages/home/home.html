@@ -32,7 +32,7 @@
       <button ion-item *ngFor="let veh of vehicleLogData" (click)="onClickVehicleLogs()">
         {{veh.vehiclename}}
         <h3 style="color:gray">₹ {{veh.amount}} - {{veh.liters}} ltrs</h3>
-        <h4 item-right>{{veh.logdate}}</h4>
+        <h4 item-right style="font-size: 12px;">{{veh.logdate}}</h4>
       </button>
     </ion-list>
   </ion-card>
