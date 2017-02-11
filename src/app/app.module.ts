@@ -4,6 +4,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AddMobileRechargePage } from '../pages/add-mobile-recharge/add-mobile-recharge';
 import { AddPetrolLogPage } from '../pages/add-petrol-log/add-petrol-log';
+import { MobileRechargesPage } from '../pages/mobile-recharges/mobile-recharges';
+import { VehicleLogsPage } from '../pages/vehicle-logs/vehicle-logs';
 import { SettingsPage } from '../pages/settings/settings';
 
 @NgModule({
@@ -12,6 +14,8 @@ import { SettingsPage } from '../pages/settings/settings';
     HomePage,
     AddMobileRechargePage,
     AddPetrolLogPage,
+    SettingsPage,
+    MobileRechargesPage,
     SettingsPage
   ],
   imports: [
@@ -23,6 +27,8 @@ import { SettingsPage } from '../pages/settings/settings';
     HomePage,
     AddMobileRechargePage,
     AddPetrolLogPage,
+    SettingsPage,
+    MobileRechargesPage,
     SettingsPage
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }]

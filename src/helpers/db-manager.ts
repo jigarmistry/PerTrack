@@ -22,12 +22,12 @@ export class DbManager {
   }
 
   getAllMobileRecharges() {
-    let sql = `SELECT * from mobilerecharge order by id DESC`;
+    let sql = `SELECT mobilerecharge.*,mobilenumbers.mobilenumber from mobilerecharge, mobilenumbers where mobilerecharge.mobilenumberid = mobilenumbers.id order by mobilerecharge.id DESC `;
     return this.storage.query(sql);
   }
 
   getAllVehicelLogs() {
-    let sql = `SELECT * from petrollog order by id DESC`;
+    let sql = `SELECT petrollog.*,vehicles.vname from petrollog, vehicles where petrollog.vehicleid = vehicles.id order by petrollog.id DESC `;
     return this.storage.query(sql);
   }
 
@@ -88,5 +88,10 @@ export class DbManager {
     let sql = `INSERT INTO 'petrollog'('name','vehicleid','oddometer','liters','amount','logdate','status') VALUES (?,?,?,?,?,?,?)`;
     return this.storage.query(sql,
       [data["name"], data["vehicleid"], data["oddometer"], data["liters"], data["amount"], data["logdate"], 'A']);
+  }
+
+  deleteMobileRecharge(id) {
+    let sql = `DELETE FROM 'mobilerecharge' where id = ?`;
+    return this.storage.query(sql, [id]);
   }
 }
