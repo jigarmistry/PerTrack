@@ -26,6 +26,16 @@ export class DbManager {
     return this.storage.query(sql, [limit]);
   }
 
+  getVehicleLogsForHome(limit) {
+    let sql = `SELECT petrollog.*,vehicles.vname from petrollog, vehicles where petrollog.vehicleid = vehicles.id order by petrollog.id DESC limit ?`;
+    return this.storage.query(sql, [limit]);
+  }
+
+  getLastVehicelLog() {
+    let sql = `SELECT * from petrollog where order by id DESC limit 1`;
+    return this.storage.query(sql);
+  }
+
   setInitialConfigData() {
     let sql = `INSERT INTO 'configdata'('ctype','cvalue') VALUES (?,?)`;
     this.storage.query(sql, ["rlimit", "2"]);
@@ -54,7 +64,7 @@ export class DbManager {
   }
 
   addVehicle(data) {
-    let sql = `INSERT INTO 'vehicles'('name','status') VALUES (?,?)`;
+    let sql = `INSERT INTO 'vehicles'('vname','status') VALUES (?,?)`;
     return this.storage.query(sql, [data["name"], 'A']);
   }
 
@@ -62,5 +72,11 @@ export class DbManager {
     let sql = `INSERT INTO 'mobilerecharge'('name','mobilenumberid','amount','type','logdate','status') VALUES (?,?,?,?,?,?)`;
     return this.storage.query(sql,
       [data["name"], data["mobilenumberid"], data["amount"], data["type"], data["logdate"], 'A']);
+  }
+
+  addVehicleLog(data) {
+    let sql = `INSERT INTO 'petrollog'('name','vehicleid','oddometer','liters','amount','logdate','status') VALUES (?,?,?,?,?,?,?)`;
+    return this.storage.query(sql,
+      [data["name"], data["vehicleid"], data["oddometer"], data["liters"], data["amount"], data["logdate"], 'A']);
   }
 }

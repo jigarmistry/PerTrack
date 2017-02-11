@@ -29,15 +29,10 @@
       <h2 color="primary">Vehicle Logs</h2>
     </ion-item>
     <ion-list>
-      <button ion-item>
-        Activa 3G
-        <h3 style="color:gray">₹ 100</h3>
-        <h4 item-right>02-02-2017 14:12</h4>
-      </button>
-      <button ion-item>
-        Activa 3G
-        <h3 style="color:gray">₹ 100</h3>
-        <h4 item-right>02-02-2017 14:12</h4>
+      <button ion-item *ngFor="let veh of vehicleLogData">
+        {{veh.vehiclename}}
+        <h3 style="color:gray">₹ {{veh.amount}} - {{veh.liters}} ltrs</h3>
+        <h4 item-right>{{veh.logdate}}</h4>
       </button>
     </ion-list>
   </ion-card>

@@ -1,7 +1,44 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>AddPetrolLog</ion-title>
+    <ion-title>Add Vehicle Log</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label stacked>Name</ion-label>
+      <ion-input type="text" [(ngModel)]="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Amount</ion-label>
+      <ion-input type="number" [(ngModel)]="amount"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Oddo Meter</ion-label>
+      <ion-input type="number" [(ngModel)]="oddometer" placeholder={{oddometerPlaceholder}}></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Liters</ion-label>
+      <ion-input type="number" [(ngModel)]="liters" placeholder={{litersPlaceholder}}></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Vehicle</ion-label>
+      <ion-select [(ngModel)]="vehicle">
+        <ion-option value={{vehicle.id}} *ngFor="let vehicle of allVehicles">{{vehicle.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Date</ion-label>
+      <ion-datetime displayFormat="DD-MMM-YYYY HH:mm" pickerFormat="DD-MMM-YY HH:mm" [(ngModel)]="logdate"></ion-datetime>
+    </ion-item>
+  </ion-list>
 </ion-content>
+<ion-footer *ngIf="isVehicleAdded">
+  <ion-toolbar color="primary">
+    <ion-buttons style="text-align: center;width: 100%;">
+      <button style="width: 100%" ion-button tappable (click)="onClickAddVehicleLog()">
+          Add
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

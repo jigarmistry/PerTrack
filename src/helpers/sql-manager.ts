@@ -57,7 +57,7 @@ export class SqlManager {
 
     // vehicles table
     this.query(`CREATE TABLE IF NOT EXISTS 'vehicles' ('id' INTEGER PRIMARY KEY AUTOINCREMENT,
-    'name' TEXT,'status' TEXT)`).then(() => {
+    'vname' TEXT,'status' TEXT)`).then(() => {
         console.log("vehicles table created");
       }, (error) => {
         console.log("Error in vehicles table creation" + JSON.stringify(error.err));

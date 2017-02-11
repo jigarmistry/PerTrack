@@ -17,6 +17,10 @@ export class HomePage {
     mobilenumber: String, amount: String, type: String, id: Number,
     logdate: String
   }>;
+  public vehicleLogData: Array<{
+    vehiclename: String, amount: String, oddometer: String, id: Number,
+    logdate: String, liters: String
+  }>;
 
   public limit: String;
 
@@ -44,6 +48,7 @@ export class HomePage {
         }
       }
       this.getMobileRechargeData();
+      this.getVehicleLogData();
     })
   }
 
@@ -66,6 +71,23 @@ export class HomePage {
           this.mobileRechargeData.push({
             mobilenumber: rData.mobilenumber,
             amount: rData.amount, type: rData.type, id: rData.id, logdate: fDate
+          });
+        }
+      }
+    });
+  }
+
+  getVehicleLogData() {
+    this.vehicleLogData = [];
+    this.dbManager.getVehicleLogsForHome(this.limit).then((data) => {
+      if (data.res.rows.length > 0) {
+        for (var i = 0; i < data.res.rows.length; i++) {
+          let rData = data.res.rows.item(i);
+          let fDate = this.formatLogDate(rData.logdate);
+          this.vehicleLogData.push({
+            vehiclename: rData.vname,
+            amount: rData.amount, oddometer: rData.oddometer, id: rData.id, logdate: fDate,
+            liters: rData.liters
           });
         }
       }
