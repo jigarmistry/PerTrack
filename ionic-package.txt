@@ -1,0 +1,1 @@
+ionic package build android --profile pertrack --release
