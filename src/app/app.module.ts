@@ -6,7 +6,7 @@ import { AddMobileRechargePage } from '../pages/add-mobile-recharge/add-mobile-r
 import { AddPetrolLogPage } from '../pages/add-petrol-log/add-petrol-log';
 import { MobileRechargesPage } from '../pages/mobile-recharges/mobile-recharges';
 import { VehicleLogsPage } from '../pages/vehicle-logs/vehicle-logs';
-import { SettingsPage } from '../pages/settings/settings';
+import { SettingsPage, MobilesPopOver, VehiclesPopOver } from '../pages/settings/settings';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,9 @@ import { SettingsPage } from '../pages/settings/settings';
     AddPetrolLogPage,
     SettingsPage,
     MobileRechargesPage,
-    VehicleLogsPage
+    VehicleLogsPage,
+    MobilesPopOver,
+    VehiclesPopOver
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -29,7 +31,9 @@ import { SettingsPage } from '../pages/settings/settings';
     AddPetrolLogPage,
     SettingsPage,
     MobileRechargesPage,
-    VehicleLogsPage
+    VehicleLogsPage,
+    MobilesPopOver,
+    VehiclesPopOver
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }]
 })

@@ -126,7 +126,7 @@ export class HomePage {
             this.onClickAddMobileRecharge();
           }
         }, {
-          text: 'Add Petrol Log',
+          text: 'Add Vehicle Log',
           handler: () => {
             this.onClickAddPetrolLog();
           }

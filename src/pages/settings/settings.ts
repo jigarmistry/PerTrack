@@ -1,6 +1,43 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ToastController, PopoverController } from 'ionic-angular';
 import { DbManager } from '../../helpers/db-manager';
+
+@Component({
+  template: `
+  <ion-list>
+    <ion-item *ngFor="let mob of mobiles">
+      <ion-label>{{mob.mobilenumber}} - {{mob.carrier}}</ion-label>
+    </ion-item>
+  </ion-list>`
+})
+
+export class MobilesPopOver {
+  public mobiles: Array<{ mobilenumber: String, carrier: String }>;
+  constructor(private navParams: NavParams) {
+    this.mobiles = this.navParams.get('mobiles');
+  }
+  ngOnInit() {
+  }
+}
+
+@Component({
+  template: `
+  <ion-list>
+    <ion-item *ngFor="let vhl of vehicles">
+      <ion-label>{{vhl.name}}</ion-label>
+    </ion-item>
+  </ion-list>`
+})
+
+export class VehiclesPopOver {
+  public vehicles: Array<{ name: String }>;
+  constructor(private navParams: NavParams) {
+    this.vehicles = this.navParams.get('vehicles');
+  }
+  ngOnInit() {
+  }
+}
+
 
 @Component({
   selector: 'page-settings',
@@ -21,6 +58,7 @@ export class SettingsPage {
   constructor(public alertCtrl: AlertController,
     public navCtrl: NavController,
     public toastCtrl: ToastController,
+    public popOverCtrl: PopoverController,
     public navParams: NavParams) {
     this.allMobileNumbers = [];
     this.allVehicles = [];
@@ -51,7 +89,7 @@ export class SettingsPage {
       if (data.res.rows.length > 0) {
         for (let i = 0; i < data.res.rows.length; i++) {
           let item = data.res.rows.item(i);
-          let adata = { name: item.name }
+          let adata = { name: item.vname }
           this.allVehicles.push(adata);
         }
       }
@@ -188,7 +226,6 @@ export class SettingsPage {
       value = this.filterRecordLimit.toString();
       ttype = "number";
     }
-
     if (type == "dname") {
       message = "Set Default Name";
       value = this.defaultName.toString();
@@ -233,7 +270,8 @@ export class SettingsPage {
   }
 
   onClickMobileBadge() {
-    console.log("Mobile Badge");
+    let popover = this.popOverCtrl.create(MobilesPopOver, { 'mobiles': this.allMobileNumbers });
+    popover.present();
   }
 
   onClickAddVehicle() {
@@ -266,7 +304,8 @@ export class SettingsPage {
   }
 
   onClickVehicleBadge() {
-
+    let popover = this.popOverCtrl.create(VehiclesPopOver, { 'vehicles': this.allVehicles });
+    popover.present();
   }
 
 }
