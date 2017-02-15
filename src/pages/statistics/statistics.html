@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Statistics</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div>
+    <ion-segment [(ngModel)]="stateType">
+      <ion-segment-button value="mobile">
+        Mobile Recharges
+      </ion-segment-button>
+      <ion-segment-button value="vehicle">
+        Vehicle Logs
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div [ngSwitch]="stateType">
+    <div *ngSwitchCase="'mobile'">
+      <ion-card>
+        <ion-card-header style="color:darkslategrey">
+          Feb 2017
+        </ion-card-header>
+        <ion-list>
+          <button ion-item>
+            <ion-label item-left>No Of Recharges</ion-label>
+            <ion-badge item-right>20</ion-badge>
+          </button>
+        </ion-list>
+      </ion-card>
+    </div>
+    <div *ngSwitchCase="'vehicle'">
+      <ion-item>
+        <h2>vehicle</h2>
+      </ion-item>
+    </div>
+  </div>
+</ion-content>

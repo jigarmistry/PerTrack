@@ -6,6 +6,7 @@ import { AddPetrolLogPage } from '../add-petrol-log/add-petrol-log';
 import { MobileRechargesPage } from '../mobile-recharges/mobile-recharges';
 import { VehicleLogsPage } from '../vehicle-logs/vehicle-logs';
 import { SettingsPage } from '../settings/settings';
+import { StatisticsPage } from '../statistics/statistics';
 import { DbManager } from '../../helpers/db-manager';
 
 @Component({
@@ -114,6 +115,10 @@ export class HomePage {
 
   onClickSettings() {
     this.navCtrl.push(SettingsPage);
+  }
+
+  onClickStats() {
+    this.navCtrl.push(StatisticsPage);
   }
 
   onClickAdd() {
