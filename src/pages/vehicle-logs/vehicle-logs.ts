@@ -9,6 +9,12 @@ import { DbManager } from '../../helpers/db-manager';
 export class VehicleLogsPage {
 
   public dbManager: DbManager;
+
+  public recordLimit: Number;
+  public filterVehicle: String;
+  public arrayRecords: Array<{ limit: Number }>;
+  public arrayVehicles: Array<{ name: String }>;
+
   public vehicleLogs: Array<{
     vehiclename: String, amount: String, name: String,
     oddometer: String, liters: String, logdate: String, id: Number
@@ -39,6 +45,11 @@ export class VehicleLogsPage {
 
   getVehicleLogs() {
     this.vehicleLogs = [];
+    this.arrayRecords = [];
+    this.arrayVehicles = [];
+    this.dbManager.getConfigData("flimit").then((data) => {
+      this.recordLimit = parseInt(data.res.rows.item(0).cvalue);
+    });
     this.dbManager.getAllVehicelLogs().then((data) => {
       if (data.res.rows.length > 0) {
         for (var i = 0; i < data.res.rows.length; i++) {
@@ -50,11 +61,41 @@ export class VehicleLogsPage {
             oddometer: mData.oddometer, liters: mData.liters, logdate: fDate, id: mData.id
           });
         }
+        this.renderFilterData();
       }
       if (this.vehicleLogs.length == 0) {
         this.navCtrl.pop();
       }
-    })
+    });
+  }
+
+  renderFilterData() {
+    if (this.vehicleLogs.length > 1) {
+      this.filterVehicle = "All";
+      this.arrayVehicles.push({ name: "All" });
+    }
+    for (var i = 0; i < this.vehicleLogs.length; i++) {
+      let vehname = this.vehicleLogs[i].vehiclename;
+      let filterMobiles = this.arrayVehicles.filter(function (data) {
+        return data.name == vehname;
+      });
+      if (filterMobiles.length == 0) {
+        this.arrayVehicles.push({ name: vehname });
+      }
+    }
+    if (this.vehicleLogs.length == 1) {
+      this.filterVehicle = this.arrayVehicles[0].name;
+    }
+    let vehicleLogsLength = this.vehicleLogs.length;
+    let fixLimit: any = this.recordLimit;
+    if (vehicleLogsLength > fixLimit) {
+      let modLen = Math.ceil(vehicleLogsLength / fixLimit);
+      for (var i = 1; i < modLen + 1; i++) {
+        this.arrayRecords.push({ limit: i * fixLimit });
+      }
+    } else {
+      this.arrayRecords.push({ limit: fixLimit });
+    }
   }
 
   onClickDeleteVehicleLog(id) {

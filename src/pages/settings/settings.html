@@ -20,8 +20,12 @@
   <ion-item-group>
     <ion-item-divider color="light">Config</ion-item-divider>
     <ion-item>
-      <ion-label (click)="onClickSetConfigData('rlimit')" tappable>Record Limit</ion-label>
+      <ion-label (click)="onClickSetConfigData('rlimit')" tappable>Record Limit - Home</ion-label>
       <ion-badge item-right color="badgeForDefault" tappable>{{recordLimit}}</ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-label (click)="onClickSetConfigData('flimit')" tappable>Record Limit - Filter</ion-label>
+      <ion-badge item-right color="badgeForDefault" tappable>{{filterRecordLimit}}</ion-badge>
     </ion-item>
     <ion-item>
       <ion-label (click)="onClickSetConfigData('dname')" tappable>Default Name</ion-label>

@@ -49,6 +49,7 @@ export class DbManager {
   setInitialConfigData() {
     let sql = `INSERT INTO 'configdata'('ctype','cvalue') VALUES (?,?)`;
     this.storage.query(sql, ["rlimit", "2"]);
+    this.storage.query(sql, ["flimit", "2"]);
     this.storage.query(sql, ["dname", "Jigar"]);
     this.storage.query(sql, ["damount", "100"]);
   }

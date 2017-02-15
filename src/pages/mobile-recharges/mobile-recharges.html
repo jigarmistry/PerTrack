@@ -4,9 +4,35 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-30 style="text-align: center;">
+        <ion-item>
+          <ion-label stacked>Records</ion-label>
+          <ion-select [(ngModel)]="recordLimit">
+            <ion-option value={{record.limit}} *ngFor="let record of arrayRecords">{{record.limit}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col width-70 style="text-align: center">
+        <ion-item>
+          <ion-label stacked>Mobile</ion-label>
+          <ion-select [(ngModel)]="filterMobile">
+            <ion-option value={{mbl.mobile}} *ngFor="let mbl of arrayMobiles">{{mbl.mobile}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-list>
-    <ion-item-sliding #item *ngFor="let mr of mobileRecharges">
-      <button ion-item>
+    <ion-item-sliding #item *ngFor="let mr of mobileRecharges; let i=index">
+      <button ion-item *ngIf="i<recordLimit && filterMobile=='All'">
+        {{mr.mobilenumber}}
+        <h3 style="color:darkgray">{{mr.name}}</h3>
+        <h3 style="color:slategray">₹ {{mr.amount}} - {{mr.type}}</h3>
+        <h6 item-right style="font-size: 12px;">{{mr.logdate}}</h6>
+      </button>
+      <button ion-item *ngIf="i<recordLimit && filterMobile!='All' && mr.mobilenumber==filterMobile">
         {{mr.mobilenumber}}
         <h3 style="color:darkgray">{{mr.name}}</h3>
         <h3 style="color:slategray">₹ {{mr.amount}} - {{mr.type}}</h3>

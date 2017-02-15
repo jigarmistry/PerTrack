@@ -4,6 +4,26 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-30 style="text-align: center;">
+        <ion-item>
+          <ion-label stacked>Records</ion-label>
+          <ion-select [(ngModel)]="recordLimit">
+            <ion-option value={{record.limit}} *ngFor="let record of arrayRecords">{{record.limit}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col width-70 style="text-align: center">
+        <ion-item>
+          <ion-label stacked>Vehicle</ion-label>
+          <ion-select [(ngModel)]="filterVehicle">
+            <ion-option value={{vhl.name}} *ngFor="let vhl of arrayVehicles">{{vhl.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-list>
     <ion-item-sliding #item *ngFor="let vl of vehicleLogs">
       <button ion-item>

@@ -14,6 +14,7 @@ export class SettingsPage {
   public mobileNumbersCount: Number;
   public vehiclesCount: Number;
   public recordLimit: String;
+  public filterRecordLimit: String;
   public defaultName: String;
   public defaultAmount: String;
 
@@ -60,13 +61,15 @@ export class SettingsPage {
     this.dbManager.getConfigData("rlimit").then((data) => {
       this.recordLimit = data.res.rows.item(0).cvalue;
     });
+    this.dbManager.getConfigData("flimit").then((data) => {
+      this.filterRecordLimit = data.res.rows.item(0).cvalue;
+    });
     this.dbManager.getConfigData("dname").then((data) => {
       this.defaultName = data.res.rows.item(0).cvalue;
     });
     this.dbManager.getConfigData("damount").then((data) => {
       this.defaultAmount = data.res.rows.item(0).cvalue;
     });
-
   }
 
   addMobileNumberIntoDb(data) {
@@ -179,6 +182,12 @@ export class SettingsPage {
     var message = "Set Record Limit";
     var value = this.recordLimit.toString();
     var ttype = "number";
+
+    if (type == "flimit") {
+      message = "Set Filter Record Limit";
+      value = this.filterRecordLimit.toString();
+      ttype = "number";
+    }
 
     if (type == "dname") {
       message = "Set Default Name";

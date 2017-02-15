@@ -10,6 +10,11 @@ import { DbManager } from '../../helpers/db-manager';
 export class MobileRechargesPage {
 
   public dbManager: DbManager;
+  public recordLimit: Number;
+  public filterMobile: String;
+  public arrayRecords: Array<{ limit: Number }>;
+  public arrayMobiles: Array<{ mobile: String }>;
+
   public mobileRecharges: Array<{
     name: String, amount: String, mobilenumber: String,
     type: String, logdate: String, id: Number
@@ -43,6 +48,11 @@ export class MobileRechargesPage {
 
   getMobileRecharges() {
     this.mobileRecharges = [];
+    this.arrayMobiles = [];
+    this.arrayRecords = [];
+    this.dbManager.getConfigData("flimit").then((data) => {
+      this.recordLimit = data.res.rows.item(0).cvalue;
+    });
     this.dbManager.getAllMobileRecharges().then((data) => {
       if (data.res.rows.length > 0) {
         for (var i = 0; i < data.res.rows.length; i++) {
@@ -53,11 +63,42 @@ export class MobileRechargesPage {
             mobilenumber: mData.mobilenumber, type: mData.type, logdate: fDate, id: mData.id
           });
         }
+        this.renderFilterData();
       }
       if (this.mobileRecharges.length == 0) {
         this.navCtrl.pop();
       }
-    })
+    });
+  }
+
+  renderFilterData() {
+    if (this.mobileRecharges.length > 1) {
+      this.filterMobile = "All";
+      this.arrayMobiles.push({ mobile: "All" });
+    }
+    for (var i = 0; i < this.mobileRecharges.length; i++) {
+      let mobilenumber = this.mobileRecharges[i].mobilenumber;
+      let filterMobiles = this.arrayMobiles.filter(function (data) {
+        return data.mobile == mobilenumber;
+      });
+      if (filterMobiles.length == 0) {
+        this.arrayMobiles.push({ mobile: mobilenumber });
+      }
+    }
+    if (this.mobileRecharges.length == 1) {
+      this.filterMobile = this.arrayMobiles[0].mobile;
+    }
+
+    let mobileRechargesLength = this.mobileRecharges.length;
+    let fixLimit: any = this.recordLimit;
+    if (mobileRechargesLength > fixLimit) {
+      let modLen = Math.ceil(mobileRechargesLength / fixLimit);
+      for (var i = 1; i < modLen + 1; i++) {
+        this.arrayRecords.push({ limit: i * fixLimit });
+      }
+    } else {
+      this.arrayRecords.push({ limit: fixLimit });
+    }
   }
 
   onClickDeleteRecharge(id) {
